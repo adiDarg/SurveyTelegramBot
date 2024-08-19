@@ -2,23 +2,17 @@ package org.example;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Stack;
 
 public class Poll {
-    private String title;
+    private final String title;
     private final List<Question> questions;
     public Poll(String title) {
         this.title = title;
-        questions = new ArrayList<Question>();
+        questions = new ArrayList<>();
     }
 
     public String getTitle() {
         return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
     public Question getQuestion(int index) {
         return questions.get(index - 1);
@@ -49,8 +43,8 @@ public class Poll {
             List<Integer> orderedPercent = questions.get(i).getAnswers().keySet().stream().
                     sorted((k1,k2) -> -1 * questions.get(finalI).getAnswers().get(k1).compareTo(questions.get(finalI).getAnswers().get(k2)))
                     .toList();
-            for (int j = 0; j < orderedPercent.size(); j++) {
-                result.append("\t").append(orderedPercent.get(j)).append(": ").append((double)questions.get(finalI).getAnswers().get(orderedPercent.get(j)) * 100/questions.get(finalI).answerCount()).append("%\n");
+            for (Integer integer : orderedPercent) {
+                result.append("\t").append(integer).append(": ").append((double) questions.get(finalI).getAnswers().get(integer) * 100 / questions.get(finalI).answerCount()).append("%\n");
             }
         }
         return result.toString();
